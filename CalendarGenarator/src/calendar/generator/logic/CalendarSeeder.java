@@ -1,5 +1,9 @@
 package calendar.generator.logic;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CalendarSeeder {
 
 	
@@ -60,5 +64,48 @@ public class CalendarSeeder {
 	private LoopCounter soy = new LoopCounter(1,2);		// SOY => Semester of year
 	
 	
+	// Calendar definition specifics 
+	Date date = new Date();
+	
+	public CalendarSeeder(Date date)
+	{
+		this.date = date;
+	}
+	
+	
+	// Getters and Setters
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
+	public String[][] generator()
+	{
+		String cal[][] = new String[365][20];
+		Calendar c = Calendar.getInstance();
+		
+		SimpleDateFormat pattern = new SimpleDateFormat("YYYYMMdd");
+		
+		if (this.getDate()==null)
+			return null;
+				
+		for(int ptr=0;ptr <= 364;ptr++)
+		{
+			cal[ptr][0] = pattern.format(date).toString();
+			
+			c.setTime(this.getDate());
+			c.add(Calendar.DAY_OF_MONTH,1);
+			this.setDate(c.getTime());
+		}
+		
+		
+		return cal;
+	}
+
 	
 }
