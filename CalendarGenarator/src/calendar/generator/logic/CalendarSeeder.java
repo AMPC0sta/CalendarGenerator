@@ -83,7 +83,6 @@ public class CalendarSeeder {
 		this.date = date;
 	}
 	
-	
 	public String[][] generator()
 	{
 		String cal[][] = new String[365][20];
