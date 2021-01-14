@@ -21,6 +21,13 @@ public class LoopCounter {
 		this.max = max;
 		this.internal = internal;
 	}
+	
+	LoopCounter(int min,int max)
+	{
+		this.min = min;
+		this.max = max;
+		this.internal = min;
+	}
 
 	// getters and setters
 	public int getMin() {
