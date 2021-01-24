@@ -65,5 +65,9 @@ public class LoopCounter {
 			this.setInternal(s+1);
 	}
 	
+	public void reset()
+	{
+		this.setInternal(this.getMin());
+	}
 	
 }

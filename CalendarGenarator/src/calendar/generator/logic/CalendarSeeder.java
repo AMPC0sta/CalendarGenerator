@@ -140,7 +140,7 @@ public class CalendarSeeder {
 		// Select the calendar turning points
 		switch(this.getCalendar_type())
 		{
-			case TYPE_544: type_array = type_544;
+			case TYPE_544:  type_array = type_544;
 							break;
 			case TYPE_454 : type_array = type_454;
 							break;
@@ -163,8 +163,17 @@ public class CalendarSeeder {
 			{
 				cal[ptr][0] = pattern.format(date).toString();
 				
-				//if(
+				if(d <= type_array[m])
+					{
+					doy.increment();
+					dom.increment();
+					}
+				else
+				{
+					moy.increment();
+					dom.reset();
 			
+				}
 				c.setTime(this.getDate());
 				c.add(Calendar.DAY_OF_MONTH,1);
 				this.setDate(c.getTime());
