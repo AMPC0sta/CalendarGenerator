@@ -27,10 +27,13 @@ public class CalendarSeeder {
 	
 	                              // 35 +28 +28  +35  +28  +28  +35  +28  +28  +35  +28  +28  +7(To handle 53 weeks years)
 	private final int[] type_544 = { 35, 63, 91, 126, 154, 182, 217, 245, 273, 308, 336, 364, 371 };
-	
 	private final int[] type_454 = { 28, 63, 91, 119, 154, 182, 210, 245, 273, 301, 226, 364, 371 };
-	
 	private final int[] type_445 = { 28, 56, 91, 119, 147, 182, 210, 238, 273, 301, 329, 364, 371 };
+	
+	public final static int TYPE_544 = 544;
+	public final static int TYPE_454 = 454;
+	public final static int TYPE_455 = 455;
+	public final static int MAX_DAYS_PER_YEAR = 371;
 	
 
 	// Calendar internal vars
@@ -65,41 +68,107 @@ public class CalendarSeeder {
 	
 	
 	// Calendar definition specifics 
-	Date date = new Date();
+	private Date date = new Date();
+	private int calendar_type = TYPE_454;
+	private int[] type_array;
+	private int years_long = 0;
+	private int year = 0;
+	
 	
 	public CalendarSeeder(Date date)
 	{
 		this.date = date;
 	}
 	
+	public CalendarSeeder(Date date,int calendar_type,int year,int years_long)
+	{
+		this.date = date;
+		this.calendar_type = calendar_type;
+		this.year = year;
+		this.years_long = years_long;
+	}
+	
+	
+	
 	
 	// Getters and Setters
+	public int getCalendar_type() {
+		return calendar_type;
+	}
 
+	public void setCalendar_type(int calendar_type) {
+		this.calendar_type = calendar_type;
+	}
 	public Date getDate() {
 		return date;
 	}
 
+	
 	public void setDate(Date date) {
 		this.date = date;
 	}
 	
+
+	public int getYears_long() {
+		return years_long;
+	}
+
+	public void setYears_long(int years_long) {
+		this.years_long = years_long;
+	}
+
+	
+	
+	
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
 	public String[][] generator()
 	{
 		String cal[][] = new String[365][20];
 		Calendar c = Calendar.getInstance();
+
 		
 		SimpleDateFormat pattern = new SimpleDateFormat("YYYYMMdd");
 		
+		
+		// Select the calendar turning points
+		switch(this.getCalendar_type())
+		{
+			case TYPE_544: type_array = type_544;
+							break;
+			case TYPE_454 : type_array = type_454;
+							break;
+			case TYPE_455 : type_array = type_445;
+							break;
+			default:		type_array = null;
+				
+		}
+		
 		if (this.getDate()==null)
 			return null;
-				
-		for(int ptr=0;ptr <= 364;ptr++)
+		
+		int ptr = 0;
+		for(int y=this.getYear(); y <= this.getYear() + this.getYears_long();y++)
 		{
-			cal[ptr][0] = pattern.format(date).toString();
 			
-			c.setTime(this.getDate());
-			c.add(Calendar.DAY_OF_MONTH,1);
-			this.setDate(c.getTime());
+			int m = moy.getInternal();
+			int d = doy.getInternal();
+			while(m <= 12)
+			{
+				cal[ptr][0] = pattern.format(date).toString();
+				
+				//if(
+			
+				c.setTime(this.getDate());
+				c.add(Calendar.DAY_OF_MONTH,1);
+				this.setDate(c.getTime());
+			}
 		}
 		
 		
