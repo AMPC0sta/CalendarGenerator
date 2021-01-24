@@ -23,14 +23,15 @@ public class CalendarGeneratorTestClass {
 			e.printStackTrace();
 		}
 		
-		CalendarSeeder c = new CalendarSeeder(date);
+		CalendarSeeder c = new CalendarSeeder(date,CalendarSeeder.TYPE_454,2021,5);
 		
 		System.out.println("******************** Testing class ************************");
 		
 		cal = c.generator();
 		
 		for(int ptr=0; ptr <= 364;ptr++ )
-			System.out.println(cal[ptr][0]);
+			System.out.println("Gregorian Date="+cal[ptr][0]+",DOY="+cal[ptr][1]);
+		
 	}
 
 }

@@ -157,11 +157,19 @@ public class CalendarSeeder {
 		for(int y=this.getYear(); y <= this.getYear() + this.getYears_long();y++)
 		{
 			
-			int m = moy.getInternal();
-			int d = doy.getInternal();
+			int m = 0;
+			int d = 0;
+			
 			while(m <= 12)
 			{
+				m = moy.getInternal();
+				d = doy.getInternal();
+				
 				cal[ptr][0] = pattern.format(date).toString();
+				cal[ptr][1] = String.valueOf(d);
+				cal[ptr][2] = String.valueOf(dom.getInternal());
+				cal[ptr][3] = String.valueOf(m);
+				
 				
 				if(d <= type_array[m])
 					{
